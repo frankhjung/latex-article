@@ -2,11 +2,9 @@
 
 \usepackage{amsmath}
 \usepackage{hyperref}
-\usepackage[latin1]{inputenc}
 \usepackage{lipsum}
 \usepackage{listings}
 \usepackage{tikz}
-\usepackage{verbatim}
 
 \title{\LaTeXe{} Example Document}
 \author{Frank Jung}
@@ -43,17 +41,17 @@ document there are \href{http://www.lipsum.com/}{Lorem Ipsum} paragraphs.
 \addcontentsline{toc}{section}{Equations}
 
 Equations can be included into the document in a number of ways. The first
-example can be a either number or un-numbered equation.
+example can be a either number or unnumbered equation.
 
 \paragraph{}
 The mass-energy equivalence is described by the famous equation:
 
 \begin{equation}
-    E = mc^2
+  E = mc^2
 \end{equation}
 
 \paragraph{}
-Equations can also be in-line. For example, $f(x) = x^2$. An more text here.
+Equations can also be inline. For example, $f(x) = x^2$. An more text here.
 \lipsum[2]
 
 \sectionbreak{}
@@ -61,9 +59,13 @@ Equations can also be in-line. For example, $f(x) = x^2$. An more text here.
 \section*{Gnuplot}
 \addcontentsline{toc}{section}{Gnuplot}
 
-Plots can be included or rendered in-line. The following example uses
-\href{http://www.gnuplot.info/}{Gnuplot} to produce a graph of three functions.
-To render this plot ensure that:
+Plots can be included or rendered inline. The following example uses
+\href{http://www.gnuplot.info/}{Gnuplot} to graph functions.
+
+\subsection*{Inline Gnuplot}
+\addcontentsline{toc}{subsection}{Inline Gnuplot}
+
+To render this inline plot ensure that:
 \begin{itemize}
   \item \texttt{gnuplot} is installed
   \item \texttt{latexmf} requires the \texttt{-shell-escape} option
@@ -77,28 +79,51 @@ This renders as:
     \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
     \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
     \draw[color=red] plot[id=x] function{x}
-        node[right] {$f(x) =x$};
+      node[right] {$f(x) =x$};
     \draw[color=blue] plot[id=sin] function{sin(x)}
-        node[right] {$f(x) = \sin x$};
+      node[right] {$f(x) = \sin x$};
     \draw[color=orange] plot[id=exp] function{0.05*exp(x)}
-        node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+      node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
   \end{tikzpicture}
-  \caption{Gnuplot example}
+  \caption{Inline Gnuplot example}
 \end{figure}
 The code to generate this plot is:
 \lstset{basicstyle=\footnotesize\ttfamily}
 \begin{figure}[h]
-  \begin{lstlisting}[frame=single,language=Gnuplot]
-      \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-      \draw[->] (-0.2,0) --- (4.2,0) node[right] {$x$};
-      \draw[->] (0,-1.2) --- (0,4.2) node[above] {$f(x)$};
-      \draw[color=red] plot[id=x] function{x}
-          node[right] {$f(x) =x$};
-      \draw[color=blue] plot[id=sin] function{sin (x)}
-          node[right] {$f(x) = \sin x$};
-      \draw[color=orange] plot[id=exp] function{0.05*exp (x)}
-          node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+  \begin{lstlisting}[frame=single,language=TeX,tabsize=2,numbers=left,numberstyle=\tiny]
+\begin{tikzpicture}[domain=0:4]
+  \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+  \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+  \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+  \draw[color=red] plot[id=x] function{x}
+    node[right] {$f(x) =x$};
+  \draw[color=blue] plot[id=sin] function{sin(x)}
+    node[right] {$f(x) = \sin x$};
+  \draw[color=orange] plot[id=exp] function{0.05*exp(x)}
+    node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+\end{tikzpicture}
   \end{lstlisting}
+  \caption{LaTeX snippet for embedded Gnuplot}
+\end{figure}
+
+\pagebreak[1]
+
+\subsection*{External Gnuplot}
+\addcontentsline{toc}{subsection}{External Gnuplot}
+
+This example includes an externally rendered Gnuplot.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{normal}
+  \caption{External Gnuplot example}
+\end{figure}
+
+The code to generate this plot is:
+\lstset{basicstyle=\footnotesize\ttfamily}
+\begin{figure}[h]
+  \begin{lstinputlisting}[frame=single,language=Gnuplot,tabsize=2,numbers=left,numberstyle=\tiny]{normal.gnuplot}
+  \end{lstinputlisting}
   \caption{Gnuplot source code}
 \end{figure}
 
@@ -112,7 +137,7 @@ a PDF from this document. The Makefile is very simple:
 
 \begin{figure}[h]
   \lstset{basicstyle=\footnotesize\ttfamily}
-  \lstinputlisting[frame=single]{Makefile}
+  \lstinputlisting[frame=single,language=make,tabsize=4,showspaces=false,numbers=left,numberstyle=\tiny]{Makefile}
   \caption{Makefile source code}
 \end{figure}
 
