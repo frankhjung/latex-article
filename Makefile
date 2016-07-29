@@ -1,19 +1,29 @@
 #!/usr/bin/env make
 
-.PHONY: all clean
-.SUFFIXES: .tex .pdf
+.PHONY: all clean cleanall
+.SUFFIXES: .tex .pdf .gnuplot .eps
 
-DOCS=example.tex
+TEXS = example.tex
+PLOTS = plot.gnuplot
 
-all:	clean tex
+all: clean gnuplot tex
+
+.gnuplot.eps:
+	-gnuplot $<
 
 .tex.pdf:
-	latexmk -pdf -quiet \
+	-latexmk -quiet -pdf \
 		-pdflatex="pdflatex -shell-escape %O %S" $<
 
-tex:	$(patsubst %.tex, %.pdf, $(DOCS))
+gnuplot: $(patsubst %.gnuplot, %.eps, $(PLOTS))
+
+tex: $(patsubst %.tex, %.pdf, $(TEXS))
 
 clean:
-	latexmk -C $(DOCS)
-	rm -f *~ *.aux *.bak *.dvi *.fdb_latexmk *.fls \
-		*.gnuplot *.gz *.log *.out *.pdf *.table *.toc
+	-latexmk -quiet -c $(TEXS)
+	-rm -f $(patsubst %.tex, %.*.*, $(TEXS))
+
+cleanall: clean
+	-latexmk -quiet -C $(TEXS)
+	-rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
+	-rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))

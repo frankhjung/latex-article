@@ -2,12 +2,13 @@
 *.aux
 *.bak
 *.dvi
+*.eps
+example.*.gnuplot
 *.fdb_latexmk
 *.fls
-*.gnuplot
 *.gz
 *.lo?
 *.out
 *.pdf
-*.table
+example.*.table
 *.toc
