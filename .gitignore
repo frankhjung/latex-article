@@ -1,0 +1,13 @@
+*~
+*.aux
+*.bak
+*.dvi
+*.fdb_latexmk
+*.fls
+*.gnuplot
+*.gz
+*.lo?
+*.out
+*.pdf
+*.table
+*.toc
