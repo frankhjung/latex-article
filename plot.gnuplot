@@ -2,9 +2,9 @@
 
 # set title "Normal (Gaussian) Distribution"
 # set terminal png medium size 320,240
-# set output "normal.png"
+# set output "plot.png"
 set terminal postscript eps enhanced color
-set output "normal.eps"
+set output "plot.eps"
 
 y(x) = exp(-(x**2 / 2)) / sqrt(2 * pi)
 

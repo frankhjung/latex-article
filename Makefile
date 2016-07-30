@@ -4,25 +4,26 @@
 .SUFFIXES: .tex .pdf .gnuplot .eps
 
 TEXS = example.tex
-GNUPLOTS = normal.gnuplot
+PLOTS = plot.gnuplot
 
 all: clean gnuplot tex
 
 .gnuplot.eps:
-	gnuplot $<
+	-gnuplot $<
 
 .tex.pdf:
-	latexmk -pdf -quiet \
+	-latexmk -quiet -pdf \
 		-pdflatex="pdflatex -shell-escape %O %S" $<
 
-gnuplot: $(patsubst %.gnuplot, %.eps, $(GNUPLOTS))
+gnuplot: $(patsubst %.gnuplot, %.eps, $(PLOTS))
 
 tex: $(patsubst %.tex, %.pdf, $(TEXS))
 
 clean:
-	rm -f *~ *.aux *.bak *.dvi *.eps *.fdb_latexmk *.fls \
-		example.*.gnuplot *.gz *.lo? *.out *.table *.toc
+	-latexmk -quiet -c $(TEXS)
+	-rm -f $(patsubst %.tex, %.*.*, $(TEXS))
 
 cleanall: clean
-	latexmk -C $(TEXS)
-	rm -f normal*.pdf
+	-latexmk -quiet -C $(TEXS)
+	-rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
+	-rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))
