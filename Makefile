@@ -3,17 +3,19 @@
 .PHONY: all clean cleanall
 .SUFFIXES: .tex .pdf .gnuplot .eps
 
-TEXS = example.tex
 PLOTS = plot.gnuplot
+TEXS = example.tex
+TABLES = table.csv
 
-all: clean gnuplot tex
+all: gnuplot tex
 
 .gnuplot.eps:
-	-gnuplot $<
+	gnuplot $<
 
 .tex.pdf:
-	-latexmk -quiet -pdf \
-		-pdflatex="pdflatex -shell-escape %O %S" $<
+	-latexmk -f -quiet -pdf -dvi- -ps- \
+		-interaction=nonstopmode -shell-escape \
+		-pdflatex="pdflatex %O %S" $<
 
 gnuplot: $(patsubst %.gnuplot, %.eps, $(PLOTS))
 
@@ -21,9 +23,12 @@ tex: $(patsubst %.tex, %.pdf, $(TEXS))
 
 clean:
 	-latexmk -quiet -c $(TEXS)
-	-rm -f $(patsubst %.tex, %.*.*, $(TEXS))
+	@rm -f $(patsubst %.tex, %.*.*, $(TEXS))
 
 cleanall: clean
 	-latexmk -quiet -C $(TEXS)
-	-rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
-	-rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))
+	@rm -f *~
+	@rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
+	@rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))
+	@rm -f $(patsubst %.csv, %.pdf, $(TABLES))
+	@rm -f $(patsubst %.csv, %.tex, $(TABLES))

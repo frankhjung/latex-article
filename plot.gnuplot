@@ -1,8 +1,6 @@
 #!/usr/bin/env gnuplot
 
 # set title "Normal (Gaussian) Distribution"
-# set terminal png medium size 320,240
-# set output "plot.png"
 set terminal postscript eps enhanced color
 set output "plot.eps"
 

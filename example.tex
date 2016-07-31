@@ -1,14 +1,17 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
 
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{lipsum}
-\usepackage{listings}
-\usepackage{tikz}
+\usepackage{amsmath}        % mathematics
+\usepackage{hyperref}       % hyper-links
+\usepackage{lipsum}         % random text
+\usepackage{listings}       % boxed file lists
+\usepackage{tikz}           % graphics
+\usepackage{booktabs}       % for table rendering
+\usepackage{pgfplotstable}  % plot a table from .csv files
+\usepackage{pgfcalendar}    % for date columns
 
 \title{\LaTeXe{} Example Document}
 \author{Frank Jung}
-\date{29 Jul 2016}
+\date{\today}
 
 \begin{document}
 
@@ -19,7 +22,7 @@
 \pagenumbering{roman}
 \tableofcontents{}
 \listoffigures
-% \listoftables
+\listoftables
 \newpage
 
 \pagenumbering{arabic}
@@ -106,7 +109,7 @@ The code to generate this plot is:
   \caption{LaTeX snippet for embedded Gnuplot}
 \end{figure}
 
-\pagebreak[1]
+\pagebreak[4]
 
 \subsection*{External Gnuplot}
 \addcontentsline{toc}{subsection}{External Gnuplot}
@@ -122,12 +125,40 @@ This example includes an externally rendered Gnuplot.
 The code to generate this plot is:
 \lstset{basicstyle=\footnotesize\ttfamily}
 \begin{figure}[h]
-  \begin{lstinputlisting}[frame=single,language=Gnuplot,tabsize=2,numbers=left,numberstyle=\tiny]{plot.gnuplot}
+  \begin{lstinputlisting}[frame=single,
+    language=Gnuplot,
+    tabsize=2,
+    numbers=left,
+    numberstyle=\tiny]{plot.gnuplot}
   \end{lstinputlisting}
   \caption{Gnuplot source code}
 \end{figure}
 
-\pagebreak[4]
+\sectionbreak{}
+
+\section*{Tables}
+\addcontentsline{toc}{section}{Tables}
+
+The following example shows how to reproduce table data from an external CSV source.
+
+\begin{table}[h]
+\label{table1}
+  \begin{center}
+    \pgfplotstabletypeset[
+      col sep=comma,
+      every head row/.style={before row=\toprule,after row=\midrule},
+      columns/file/.style={column name=\textit{File Name},column type=l,string type},
+      columns/size/.style={column name=\textit{Size (Bytes)},column type=r,int type},
+      columns/changed/.style={column name=\textit{Date Changed},column type=r,date type={\day\ \monthshortname\ \year}},
+      every last row/.style={after row=\bottomrule},
+    ]{table.csv}
+    \caption{Generate table from CSV file}
+  \end{center}
+\end{table}
+
+\lipsum[3]
+
+\sectionbreak{}
 
 \section*{Makefile}
 \addcontentsline{toc}{section}{Makefile}
@@ -135,7 +166,7 @@ The code to generate this plot is:
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
 a PDF from this document. The Makefile is very simple:
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \lstset{basicstyle=\footnotesize\ttfamily}
   \lstinputlisting[frame=single,language=make,tabsize=4,showspaces=false,numbers=left,numberstyle=\tiny]{Makefile}
   \caption{Makefile source code}
