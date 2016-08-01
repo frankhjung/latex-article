@@ -1,15 +1,16 @@
 #!/usr/bin/env make
 
 .PHONY: all clean cleanall
-.SUFFIXES: .tex .pdf .gnuplot .eps
+.SUFFIXES: .tex .pdf .gnuplot
 
+DOCS=example plot
 PLOTS = plot.gnuplot
-TEXS = example.tex
+TEXS = $(patsubst %, %.tex, $(DOCS))
 TABLES = table.csv
 
 all: gnuplot tex
 
-.gnuplot.eps:
+.gnuplot.tex:
 	gnuplot $<
 
 .tex.pdf:
@@ -17,7 +18,7 @@ all: gnuplot tex
 		-interaction=nonstopmode -shell-escape \
 		-pdflatex="pdflatex %O %S" $<
 
-gnuplot: $(patsubst %.gnuplot, %.eps, $(PLOTS))
+gnuplot: $(patsubst %.gnuplot, %.tex, $(PLOTS))
 
 tex: $(patsubst %.tex, %.pdf, $(TEXS))
 
@@ -27,8 +28,7 @@ clean:
 
 cleanall: clean
 	-latexmk -quiet -C $(TEXS)
-	@rm -f *~
-	@rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
-	@rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))
 	@rm -f $(patsubst %.csv, %.pdf, $(TABLES))
 	@rm -f $(patsubst %.csv, %.tex, $(TABLES))
+	@rm -f $(patsubst %.gnuplot, %.tex, $(PLOTS))
+	@rm -f *~
