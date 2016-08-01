@@ -13,6 +13,17 @@
 \author{Frank Jung}
 \date{\today}
 
+\lstset{
+  basicstyle=\small,
+  frame=single,
+  tabsize=2,
+  showspaces=false,
+  showtabs=false,
+  numbers=left,
+  numberstyle=\tiny,
+  numberblanklines=false
+  }
+
 \begin{document}
 
 \pagenumbering{gobble}
@@ -91,9 +102,8 @@ This renders as:
   \caption{Inline Gnuplot example}
 \end{figure}
 The code to generate this plot is:
-\lstset{basicstyle=\footnotesize\ttfamily}
 \begin{figure}[h]
-  \begin{lstlisting}[frame=single,language=TeX,tabsize=2,numbers=left,numberstyle=\tiny]
+  \begin{lstlisting}[language=TeX]
 \begin{tikzpicture}[domain=0:4]
   \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
   \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
@@ -123,13 +133,8 @@ This example includes an externally rendered Gnuplot.
 \end{figure}
 
 The code to generate this plot is:
-\lstset{basicstyle=\footnotesize\ttfamily}
 \begin{figure}[h]
-  \begin{lstinputlisting}[frame=single,
-    language=Gnuplot,
-    tabsize=2,
-    numbers=left,
-    numberstyle=\tiny]{plot.gnuplot}
+  \begin{lstinputlisting}[language=Gnuplot]{plot.gnuplot}
   \end{lstinputlisting}
   \caption{Gnuplot source code}
 \end{figure}
@@ -166,9 +171,8 @@ The following example shows how to reproduce table data from an external CSV sou
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
 a PDF from this document. The Makefile is very simple:
 
-\begin{figure}[ht]
-  \lstset{basicstyle=\footnotesize\ttfamily}
-  \lstinputlisting[frame=single,language=make,tabsize=4,showspaces=false,numbers=left,numberstyle=\tiny]{Makefile}
+\begin{figure}[h]
+  \lstinputlisting[language=make,tabsize=4]{Makefile}
   \caption{Makefile source code}
 \end{figure}
 

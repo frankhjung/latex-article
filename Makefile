@@ -3,8 +3,9 @@
 .PHONY: all clean cleanall
 .SUFFIXES: .tex .pdf .gnuplot .eps
 
+DOCS = example
 PLOTS = plot.gnuplot
-TEXS = example.tex
+TEXS = $(patsubst %, %.tex, $(DOCS))
 TABLES = table.csv
 
 all: gnuplot tex
@@ -27,8 +28,8 @@ clean:
 
 cleanall: clean
 	-latexmk -quiet -C $(TEXS)
-	@rm -f *~
 	@rm -f $(patsubst %.gnuplot, %*.pdf, $(PLOTS))
 	@rm -f $(patsubst %.gnuplot, %*.eps, $(PLOTS))
 	@rm -f $(patsubst %.csv, %.pdf, $(TABLES))
 	@rm -f $(patsubst %.csv, %.tex, $(TABLES))
+	@rm -f *~
