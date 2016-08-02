@@ -1,14 +1,14 @@
 *~
+article.*.gnuplot
+article.*.table
 *.aux
 *.bak
 *.dvi
 *.eps
-example.*.gnuplot
 *.fdb_latexmk
 *.fls
 *.gz
 *.lo?
 *.out
 *.pdf
-example.*.table
 *.toc

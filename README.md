@@ -1,4 +1,4 @@
-# LaTeX
+# LaTeX Article Example
 
 A example LaTeX project.
 
