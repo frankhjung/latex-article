@@ -2,8 +2,9 @@
 
 .PHONY: all clean cleanall
 .SUFFIXES: .tex .pdf .gnuplot .eps
+.DEFAULT: all
 
-DOCS = article
+DOCS = article attachment
 PLOTS = plot.gnuplot
 TEXS = $(patsubst %, %.tex, $(DOCS))
 TABLES = table.csv
@@ -16,11 +17,11 @@ TABLES = table.csv
 		-interaction=nonstopmode -shell-escape \
 		-pdflatex="pdflatex %O %S" $<
 
-gnuplot: $(patsubst %.gnuplot, %.eps, $(PLOTS))
+gnuplot := $(patsubst %.gnuplot, %.eps, $(PLOTS))
 
-tex: $(patsubst %.tex, %.pdf, $(TEXS))
+tex := $(patsubst %.tex, %.pdf, $(TEXS))
 
-all: gnuplot tex
+all: $(gnuplot) $(tex)
 
 clean:
 	-latexmk -quiet -c $(TEXS)
