@@ -13,7 +13,7 @@ TABLES = table.csv
 	-gnuplot $<
 
 .tex.pdf:
-	-latexmk -f -quiet -pdf -dvi- -ps- \
+	-latexmk -f -gg -quiet -pdf \
 		-interaction=nonstopmode -shell-escape \
 		-pdflatex="pdflatex %O %S" $<
 

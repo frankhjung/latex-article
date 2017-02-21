@@ -11,4 +11,5 @@ article.*.table
 *.lo?
 *.out
 *.pdf
+tags
 *.toc
