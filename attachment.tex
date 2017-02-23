@@ -5,8 +5,8 @@
 \subsection*{Restore older version of a file}
 \addcontentsline{toc}{subsection}{Restore older version of a file}
 
-\noindent Given a list of commits on a file, revert to an older state of the file and
-commit as a new change.
+\noindent Given a list of commits on a file, revert to an older state of the
+file and commit as a new change.
 
 \subsubsection*{Method}
 \addcontentsline{toc}{subsubsection}{Method}
@@ -21,6 +21,7 @@ commit as a new change.
 \addcontentsline{toc}{subsubsection}{Detail}
 
 \noindent This is the current version of our test file:
+
 \begin{lstlisting}[language=ksh,caption={Test file: README.md}]
 test
 changed
@@ -29,6 +30,7 @@ exit-code
 
 \noindent To determine where to restore to, list the commit history of file to get commit
 hashes:
+
 \begin{lstlisting}[language=ksh]
 git log --oneline README.md
 dc9de3e latest change
@@ -37,13 +39,15 @@ fe66fc4 new change
 c56ac1c initial
 \end{lstlisting}
 
-\noindent Lets restore to a version 2 commits back. To checkout older commit for that
-file:
+\noindent Lets restore to a version 2 commits back. To checkout older commit
+for that file:
+
 \begin{lstlisting}[language=ksh]
 git checkout dbc5cca README.md
 \end{lstlisting}
 
 \noindent Check that the local file has changed, so can commit as new change:
+
 \begin{lstlisting}[language=ksh,caption={Changed file: README.md}]
 test
 changed
@@ -52,6 +56,7 @@ another change
 \end{lstlisting}
 
 \noindent You can now add changed file and commit this version as a new commit:
+
 \begin{lstlisting}[language=ksh]
 git status
 On branch master
@@ -60,7 +65,5 @@ Changes to be committed:
 
 	modified:   README.md
 \end{lstlisting}
-
-This is the end of the included attachment.
 
 % \end{document}
