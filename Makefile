@@ -1,27 +1,28 @@
 #!/usr/bin/env make
 
 .PHONY: all clean cleanall
+.SUFFIXES:
 .SUFFIXES: .tex .pdf .gnuplot .eps
 .DEFAULT: all
 
-DOCS = article attachment
-PLOTS = plot.gnuplot
-TEXS = $(patsubst %, %.tex, $(DOCS))
+TARGET = article.pdf
+TEXS   = $(patsubst %.pdf, %.tex, $(TARGET)) attachment.tex
+PLOTS  = plot.gnuplot
 TABLES = table.csv
 
 .gnuplot.eps:
 	-gnuplot $<
 
 .tex.pdf:
-	-latexmk -f -gg -quiet -pdf \
-		-interaction=nonstopmode -shell-escape \
-		-pdflatex="pdflatex %O %S" $<
+	-latexmk -f \
+		-quiet \
+		-pdf \
+		-shell-escape \
+		-interaction=nonstopmode $<
 
 gnuplot := $(patsubst %.gnuplot, %.eps, $(PLOTS))
 
-tex := $(patsubst %.tex, %.pdf, $(TEXS))
-
-all: $(gnuplot) $(tex)
+all: $(gnuplot) $(TARGET)
 
 clean:
 	-latexmk -quiet -c $(TEXS)
