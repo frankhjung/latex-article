@@ -1,9 +1,9 @@
 \documentclass[10pt,a4paper]{article}
 
 \usepackage{amsmath}        % mathematics
-\usepackage{hyperref}       % hyper-links
 \usepackage{lipsum}         % random text
 \usepackage{listings}       % boxed file lists
+\usepackage{hyperref}       % hyper-links
 \usepackage{tikz}           % graphics
 \usepackage{booktabs}       % for table rendering
 \usepackage{pgfplotstable}  % plot a table from .csv files
@@ -84,9 +84,8 @@ To render this inline plot ensure that:
   \item \texttt{gnuplot} is installed
   \item \texttt{latexmf} requires the \texttt{-shell-escape} option
 \end{itemize}
-This renders as:
-
-\begin{figure}[h]
+This renders as Figure \ref{fig:inline}.
+\begin{figure}
   \centering
   \begin{tikzpicture}[domain=0:4]
     \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
@@ -100,23 +99,25 @@ This renders as:
       node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
   \end{tikzpicture}
   \caption{Inline Gnuplot example}
+	\label{fig:inline}
 \end{figure}
-The code to generate this plot is:
-\begin{figure}[h]
+The code to generate this plot is listed in Figure \ref{lst:inline}.
+\begin{figure}
   \begin{lstlisting}[language=TeX]
-\begin{tikzpicture}[domain=0:4]
-  \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-  \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-  \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-  \draw[color=red] plot[id=x] function{x}
-    node[right] {$f(x) =x$};
-  \draw[color=blue] plot[id=sin] function{sin(x)}
-    node[right] {$f(x) = \sin x$};
-  \draw[color=orange] plot[id=exp] function{0.05*exp(x)}
-    node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
-\end{tikzpicture}
+		\begin{tikzpicture}[domain=0:4]
+			\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+			\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+			\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+			\draw[color=red] plot[id=x] function{x}
+				node[right] {$f(x) =x$};
+			\draw[color=blue] plot[id=sin] function{sin(x)}
+				node[right] {$f(x) = \sin x$};
+			\draw[color=orange] plot[id=exp] function{0.05*exp(x)}
+				node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+		\end{tikzpicture}
   \end{lstlisting}
   \caption{LaTeX snippet for embedded Gnuplot}
+	\label{lst:inline}
 \end{figure}
 
 \pagebreak[4]
@@ -124,19 +125,20 @@ The code to generate this plot is:
 \subsection*{External Gnuplot}
 \addcontentsline{toc}{subsection}{External Gnuplot}
 
-This example includes an externally rendered Gnuplot.
-
-\begin{figure}[h]
+This example includes an externally rendered Gnuplot shown in Figure
+\ref{fig:external}.
+\begin{figure}
   \centering
-  \includegraphics{plot}
+	\includegraphics[scale=0.9]{plot}
   \caption{External Gnuplot example}
+	\label{fig:external}
 \end{figure}
-
-The code to generate this plot is:
-\begin{figure}[h]
+The code to generate this plot is listed in Figure \ref{lst:external}
+\begin{figure}
   \begin{lstinputlisting}[language=Gnuplot]{plot.gnuplot}
   \end{lstinputlisting}
   \caption{Gnuplot source code}
+	\label{lst:external}
 \end{figure}
 
 \sectionbreak{}
@@ -144,10 +146,9 @@ The code to generate this plot is:
 \section*{Tables}
 \addcontentsline{toc}{section}{Tables}
 
-The following example shows how to reproduce table data from an external CSV source.
-
-\begin{table}[h]
-\label{table1}
+Table \ref{table1} shows how to reproduce table data from an external CSV
+source.
+\begin{table}
   \begin{center}
     \pgfplotstabletypeset[
       col sep=comma,
@@ -158,6 +159,7 @@ The following example shows how to reproduce table data from an external CSV sou
       every last row/.style={after row=\bottomrule}
     ]{table.csv}
     \caption{Generate table from CSV file}
+		\label{table1}
   \end{center}
 \end{table}
 
@@ -169,11 +171,11 @@ The following example shows how to reproduce table data from an external CSV sou
 \addcontentsline{toc}{section}{Makefile}
 
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
-a PDF from this document. The Makefile is very simple:
-
-\begin{figure}[h]
+a PDF from this document. The Makefile (Figure \ref{lst:makefile}) is very simple.
+\begin{figure}
   \lstinputlisting[language=make,tabsize=4]{Makefile}
   \caption{Makefile source code}
+	\label{lst:makefile}
 \end{figure}
 
 \sectionbreak{}
