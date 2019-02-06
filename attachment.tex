@@ -22,7 +22,7 @@ file and commit as a new change.
 
 \noindent This is the current version of our test file:
 
-\begin{lstlisting}[language=ksh,caption={Test file: README.md}]
+\begin{lstlisting}[language=Bash,caption={Test file: README.md},style=default]
 test
 changed
 exit-code
@@ -31,7 +31,7 @@ exit-code
 \noindent To determine where to restore to, list the commit history of file to get commit
 hashes:
 
-\begin{lstlisting}[language=ksh]
+\begin{lstlisting}[language=Bash,style=default]
 git log --oneline README.md
 dc9de3e latest change
 dbc5cca another change
@@ -42,13 +42,13 @@ c56ac1c initial
 \noindent Lets restore to a version 2 commits back. To checkout older commit
 for that file:
 
-\begin{lstlisting}[language=ksh]
+\begin{lstlisting}[language=Bash,style=default]
 git checkout dbc5cca README.md
 \end{lstlisting}
 
 \noindent Check that the local file has changed, so can commit as new change:
 
-\begin{lstlisting}[language=ksh,caption={Changed file: README.md}]
+\begin{lstlisting}[language=Bash,caption={Changed file: README.md},style=default]
 test
 changed
 exit-code
@@ -57,7 +57,7 @@ another change
 
 \noindent You can now add changed file and commit this version as a new commit:
 
-\begin{lstlisting}[language=ksh]
+\begin{lstlisting}[language=Bash,style=default]
 git status
 On branch master
 Changes to be committed:

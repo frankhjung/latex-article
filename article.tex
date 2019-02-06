@@ -1,6 +1,8 @@
 \documentclass[10pt,a4paper]{article}
 
 \usepackage{amsmath}        % mathematics
+\usepackage{xcolor}         % custom colours
+\usepackage{courier}        % better code font
 \usepackage{lipsum}         % random text
 \usepackage{listings}       % boxed file lists
 \usepackage{hyperref}       % hyper-links
@@ -13,9 +15,11 @@
 \author{Frank Jung}
 \date{\today}
 
-\lstset{
-  basicstyle=\small,
-  frame=single,
+\definecolor{stackexchange-grey}{gray}{0.95} % shade of grey used by StackExchange
+
+\lstdefinestyle{default}{
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{stackexchange-grey},
   tabsize=2,
   showspaces=false,
   showtabs=false,
@@ -58,10 +62,10 @@ Equations can be included into the document in a number of ways. The first
 example can be a either number or unnumbered equation.
 
 \paragraph{}
-The mass-energy equivalence is described by the famous equation:
+Euler's famous equation:
 
 \begin{equation}
-  E = mc^2
+  e^{\pi i} = -1
 \end{equation}
 
 \paragraph{}
@@ -93,31 +97,31 @@ This renders as Figure \ref{fig:inline}.
     \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
     \draw[color=red] plot[id=x] function{x}
       node[right] {$f(x) =x$};
-    \draw[color=blue] plot[id=sin] function{sin(x)}
+    \draw[color=blue] plot[id=sin] function{ sin(x) }
       node[right] {$f(x) = \sin x$};
-    \draw[color=orange] plot[id=exp] function{0.05*exp(x)}
-      node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+    \draw[color=orange] plot[id=exp] function{ 0.05 * exp(x) }
+      node[right] {$f(x) = \frac{1}{20} \mathrm e$};
   \end{tikzpicture}
   \caption{Inline Gnuplot example}
-	\label{fig:inline}
+  \label{fig:inline}
 \end{figure}
 The code to generate this plot is listed in Figure \ref{lst:inline}.
 \begin{figure}
-  \begin{lstlisting}[language=TeX]
-		\begin{tikzpicture}[domain=0:4]
-			\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-			\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-			\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-			\draw[color=red] plot[id=x] function{x}
-				node[right] {$f(x) =x$};
-			\draw[color=blue] plot[id=sin] function{sin(x)}
-				node[right] {$f(x) = \sin x$};
-			\draw[color=orange] plot[id=exp] function{0.05*exp(x)}
-				node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
-		\end{tikzpicture}
+  \begin{lstlisting}[language=TeX,style=default]
+    \begin{tikzpicture}[domain=0:4]
+      \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+      \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+      \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+      \draw[color=red] plot[id=x] function{x}
+        node[right] {$f(x) =x$};
+      \draw[color=blue] plot[id=sin] function{ sin(x) }
+        node[right] {$f(x) = \sin x$};
+      \draw[color=orange] plot[id=exp] function{ 0.05 * exp(x) }
+        node[right] {$f(x) = \frac{1}{20} \mathrm e$};
+    \end{tikzpicture}
   \end{lstlisting}
   \caption{LaTeX snippet for embedded Gnuplot}
-	\label{lst:inline}
+  \label{lst:inline}
 \end{figure}
 
 \pagebreak[4]
@@ -129,16 +133,16 @@ This example includes an externally rendered Gnuplot shown in Figure
 \ref{fig:external}.
 \begin{figure}
   \centering
-	\includegraphics[scale=0.9]{plot}
+  \includegraphics[scale=0.9]{plot}
   \caption{External Gnuplot example}
-	\label{fig:external}
+  \label{fig:external}
 \end{figure}
 The code to generate this plot is listed in Figure \ref{lst:external}
 \begin{figure}
-  \begin{lstinputlisting}[language=Gnuplot]{plot.gnuplot}
+  \begin{lstinputlisting}[language=Gnuplot,style=default]{plot.gnuplot}
   \end{lstinputlisting}
   \caption{Gnuplot source code}
-	\label{lst:external}
+  \label{lst:external}
 \end{figure}
 
 \sectionbreak{}
@@ -159,7 +163,7 @@ source.
       every last row/.style={after row=\bottomrule}
     ]{table.csv}
     \caption{Generate table from CSV file}
-		\label{table1}
+    \label{table1}
   \end{center}
 \end{table}
 
@@ -171,11 +175,11 @@ source.
 \addcontentsline{toc}{section}{Makefile}
 
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
-a PDF from this document. The Makefile (Figure \ref{lst:makefile}) is very simple.
+a PDF from this document. The Makefile (Figure \ref{lst:Makefile}) is very simple.
 \begin{figure}
-  \lstinputlisting[language=make,tabsize=4]{Makefile}
+  \lstinputlisting[language=Make,style=default,tabsize=8]{Makefile}
   \caption{Makefile source code}
-	\label{lst:makefile}
+  \label{lst:Makefile}
 \end{figure}
 
 \sectionbreak{}

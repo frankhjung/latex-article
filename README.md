@@ -21,7 +21,7 @@ Alternatively there you can just call make
 **Makefile**
 
 ```bash
-make -B all
+make cleanall all
 ```
 
 ## Tables and formatting
