@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-.PHONY: all clean cleanall
+.PHONY: all lint clean cleanall
 .SUFFIXES:
 .SUFFIXES: .tex .pdf .gnuplot .eps
 .DEFAULT: all
@@ -22,7 +22,10 @@ TABLES = table.csv
 
 gnuplot := $(patsubst %.gnuplot, %.eps, $(PLOTS))
 
-all: $(gnuplot) $(TARGET)
+all: lint $(gnuplot) $(TARGET)
+
+lint:
+	-lacheck $(TEXS)
 
 clean:
 	-latexmk -quiet -c $(TEXS)

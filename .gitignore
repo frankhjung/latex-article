@@ -12,4 +12,5 @@ article.*.table
 *.out
 *.pdf
 tags
+__*_temp.tex
 *.toc

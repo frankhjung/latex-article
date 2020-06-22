@@ -15,17 +15,18 @@
 \author{Frank Jung}
 \date{\today}
 
+\pgfplotsset{compat=1.17}   % backward compatible plot
 \definecolor{stackexchange-grey}{gray}{0.95} % shade of grey used by StackExchange
 
-\lstdefinestyle{default}{
+\lstset{
   basicstyle=\small\ttfamily,
-  backgroundcolor=\color{stackexchange-grey},
   tabsize=2,
   showspaces=false,
   showtabs=false,
   numbers=left,
   numberstyle=\tiny,
-  numberblanklines=false
+  numberblanklines=false,
+  backgroundcolor=\color{stackexchange-grey},
 }
 
 \begin{document}
@@ -88,7 +89,7 @@ To render this inline plot ensure that:
   \item \texttt{gnuplot} is installed
   \item \texttt{latexmf} requires the \texttt{-shell-escape} option
 \end{itemize}
-This renders as Figure \ref{fig:inline}.
+This renders as Figure~\ref{fig:inline}.
 \begin{figure}
   \centering
   \begin{tikzpicture}[domain=0:4]
@@ -97,28 +98,28 @@ This renders as Figure \ref{fig:inline}.
     \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
     \draw[color=red] plot[id=x] function{x}
       node[right] {$f(x) =x$};
-    \draw[color=blue] plot[id=sin] function{ sin(x) }
+    \draw[color=blue] plot[id=sin] function{sin(x)}
       node[right] {$f(x) = \sin x$};
-    \draw[color=orange] plot[id=exp] function{ 0.05 * exp(x) }
-      node[right] {$f(x) = \frac{1}{20} \mathrm e$};
+    \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
+      node[right] {$f(x) = \frac{e^x}{20}$};
   \end{tikzpicture}
-  \caption{Inline Gnuplot example}
+  \caption{Inline gnuplot example}
   \label{fig:inline}
 \end{figure}
-The code to generate this plot is listed in Figure \ref{lst:inline}.
+The code to generate this plot is listed in Figure~\ref{lst:inline}.
 \begin{figure}
-  \begin{lstlisting}[language=TeX,style=default]
-    \begin{tikzpicture}[domain=0:4]
-      \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-      \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-      \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-      \draw[color=red] plot[id=x] function{x}
-        node[right] {$f(x) =x$};
-      \draw[color=blue] plot[id=sin] function{ sin(x) }
-        node[right] {$f(x) = \sin x$};
-      \draw[color=orange] plot[id=exp] function{ 0.05 * exp(x) }
-        node[right] {$f(x) = \frac{1}{20} \mathrm e$};
-    \end{tikzpicture}
+  \begin{lstlisting}
+\begin{tikzpicture}[domain=0:4]
+  \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+  \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+  \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+  \draw[color=red] plot[id=x] function{x}
+    node[right] {$f(x) = x$};
+  \draw[color=blue] plot[id=sin] function{sin(x)}
+    node[right] {$f(x) = \sin x$};
+  \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
+		node[right] {$f(x) = \frac{e^x}{20}$};
+\end{tikzpicture}
   \end{lstlisting}
   \caption{LaTeX snippet for embedded Gnuplot}
   \label{lst:inline}
@@ -128,20 +129,19 @@ The code to generate this plot is listed in Figure \ref{lst:inline}.
 
 \subsection*{External Gnuplot}
 \addcontentsline{toc}{subsection}{External Gnuplot}
-
-This example includes an externally rendered Gnuplot shown in Figure
-\ref{fig:external}.
+This example includes an externally rendered Gnuplot shown in
+Figure~\ref{fig:external}.
 \begin{figure}
   \centering
   \includegraphics[scale=0.9]{plot}
   \caption{External Gnuplot example}
   \label{fig:external}
 \end{figure}
-The code to generate this plot is listed in Figure \ref{lst:external}
+The code to generate this plot is listed in Figure~\ref{lst:external}.
 \begin{figure}
-  \begin{lstinputlisting}[language=Gnuplot,style=default]{plot.gnuplot}
+  \begin{lstinputlisting}[language=Gnuplot]{plot.gnuplot}
   \end{lstinputlisting}
-  \caption{Gnuplot source code}
+  \caption{gnuplot source code}
   \label{lst:external}
 \end{figure}
 
@@ -149,8 +149,7 @@ The code to generate this plot is listed in Figure \ref{lst:external}
 
 \section*{Tables}
 \addcontentsline{toc}{section}{Tables}
-
-Table \ref{table1} shows how to reproduce table data from an external CSV
+Table~\ref{table1} shows how to reproduce table data from an external CSV
 source.
 \begin{table}
   \begin{center}
@@ -175,9 +174,10 @@ source.
 \addcontentsline{toc}{section}{Makefile}
 
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
-a PDF from this document. The Makefile (Figure \ref{lst:Makefile}) is very simple.
+a PDF from this document. The Makefile (Figure~\ref{lst:Makefile}) is very
+simple.
 \begin{figure}
-  \lstinputlisting[language=Make,style=default,tabsize=8]{Makefile}
+  \lstinputlisting[language=make,tabsize=8]{Makefile}
   \caption{Makefile source code}
   \label{lst:Makefile}
 \end{figure}
