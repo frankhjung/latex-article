@@ -15,7 +15,12 @@ TABLES := table.csv
 	-gnuplot $<
 
 .tex.pdf:
-	-latexmk -f -quiet -pdf -shell-escape -interaction=nonstopmode $<
+	-latexmk \
+		-f \
+		-quiet \
+		-pdf \
+		-shell-escape \
+		-interaction=nonstopmode $<
 
 all: lint $(EPS) $(TARGET)
 

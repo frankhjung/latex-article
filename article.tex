@@ -53,23 +53,16 @@ document there are \href{http://www.lipsum.com/}{Lorem Ipsum} paragraphs.
 
 \lipsum[1]
 
-\sectionbreak{}
-
 \section*{Equations}
 \addcontentsline{toc}{section}{Equations}
 
 Equations can be included into the document in a number of ways. The first
-example can be a either number or unnumbered equation.
-
-\paragraph{}
-Euler's famous equation:
-
+example can be a either number or unnumbered equation. Euler's famous equation:
 \begin{equation}
   e^{\pi i} = -1
 \end{equation}
+Equations can also be include inline. For example, $f(x) = x^2$.\par
 
-\paragraph{}
-Equations can also be inline. For example, $f(x) = x^2$. An more text here.
 \lipsum[2]
 
 \sectionbreak{}
@@ -84,11 +77,14 @@ Plots can be included or rendered inline. The following example uses
 \addcontentsline{toc}{subsection}{Inline Gnuplot}
 
 To render this inline plot ensure that:
+
 \begin{itemize}
   \item \texttt{gnuplot} is installed
   \item \texttt{latexmf} requires the \texttt{-shell-escape} option
 \end{itemize}
+
 This renders as Figure~\ref{fig:inline}.
+
 \begin{figure}
   \centering
   \begin{tikzpicture}[domain=0:4]
@@ -96,7 +92,7 @@ This renders as Figure~\ref{fig:inline}.
     \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
     \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
     \draw[color=red] plot[id=x] function{x}
-      node[right] {$f(x) =x$};
+      node[right] {$f(x) = x$};
     \draw[color=blue] plot[id=sin] function{sin(x)}
       node[right] {$f(x) = \sin x$};
     \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
@@ -124,12 +120,12 @@ The code to generate this plot is listed in Listing~\ref{lst:inline}.
   \caption{TikZ code for embedded gnuplot\label{lst:inline}}
 \end{listing}
 
-\pagebreak[4]
-
 \subsection*{External Gnuplot}
 \addcontentsline{toc}{subsection}{External Gnuplot}
+
 This example includes an externally rendered Gnuplot shown in
 Figure~\ref{fig:gnuplot}.
+
 \begin{figure}
   \centering
   \includegraphics[scale=0.9]{plot}
@@ -145,8 +141,8 @@ The code to generate this plot is listed in Listing~\ref{lst:gnuplot}.
 
 \section*{Tables}
 \addcontentsline{toc}{section}{Tables}
-Table~\ref{tbl:csv} shows how to reproduce table data from an external CSV
-source.
+Table~\ref{tbl:csv} shows how to include table data from an external CSV
+source. The table placement is automatically determined by the system.
 \begin{table}
   \begin{center}
     \pgfplotstabletypeset[
@@ -160,6 +156,7 @@ source.
     \caption{Generate table from CSV file\label{tbl:csv}}
   \end{center}
 \end{table}
+For instance, this sentence appears after the table's inclusion.
 
 \lipsum[3]
 
@@ -171,24 +168,28 @@ source.
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
 a PDF from this document. The Makefile in figure~\ref{lst:Makefile} is very
 simple:
-
 \begin{listing}
   \inputminted{make}{Makefile}
   \caption{Makefile\label{lst:Makefile}}
 \end{listing}
+It contains targets to:
+\begin{itemize}
+  \item lint \TeX{} files
+  \item render a \TeX{} document into PDF
+  \item render a gnuplot to EPS
+\end{itemize}
 
 \sectionbreak{}
 
 \section*{Git}
 \addcontentsline{toc}{section}{Git}
 
-\paragraph{}
-Include another LaTeX document into this one. The following sections are
+Include another \LaTeXe{} document into this one. The following sections are
 contained in the document, \href{run:./attachment.tex}{attachment.tex}.
 
 \input{attachment}
 
-\paragraph{}
-After included attachment.
+\paragraph{After Git}
+Paragraph immediately after included \TeX{} attachment.
 
 \end{document}
