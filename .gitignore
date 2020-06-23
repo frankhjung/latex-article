@@ -9,8 +9,10 @@ article.*.table
 *.fls
 *.gz
 *.lo?
+_minted-article/
 *.out
 *.pdf
+*.pyg
 tags
 __*_temp.tex
 *.toc

@@ -10,39 +10,38 @@
 \usepackage{booktabs}       % for table rendering
 \usepackage{pgfplotstable}  % plot a table from .csv files
 \usepackage{pgfcalendar}    % for date columns
+\usepackage{minted}         % code listings
+\usepackage[utf8]{inputenc} % include files (needs -shell-escape flag)
 
 \title{\LaTeXe{} Article Example}
 \author{Frank Jung}
 \date{\today}
 
 \pgfplotsset{compat=1.17}   % backward compatible plot
-\definecolor{stackexchange-grey}{gray}{0.95} % shade of grey used by StackExchange
+\definecolor{stackexchangegrey}{gray}{0.95} % shade of grey used by StackExchange
 
-\lstset{
-  basicstyle=\small\ttfamily,
-  tabsize=2,
-  showspaces=false,
-  showtabs=false,
-  numbers=left,
-  numberstyle=\tiny,
-  numberblanklines=false,
-  backgroundcolor=\color{stackexchange-grey},
+\setminted{
+  autogobble=true,
+  bgcolor=stackexchangegrey,
+  fontsize=\small,
+  style=emacs,
 }
 
 \begin{document}
 
 \pagenumbering{gobble}
-\maketitle
-\newpage
+\maketitle{}
+\newpage{}
 
 \pagenumbering{roman}
 \tableofcontents{}
-\listoffigures
-\listoftables
-\newpage
+\listoffigures{}
+\listoflistings{}
+\listoftables{}
+\newpage{}
 
 \pagenumbering{arabic}
-\newpage
+\newpage{}
 
 \newcommand{\sectionbreak}{\clearpage}
 
@@ -103,53 +102,50 @@ This renders as Figure~\ref{fig:inline}.
     \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
       node[right] {$f(x) = \frac{e^x}{20}$};
   \end{tikzpicture}
-  \caption{Inline gnuplot example}
-  \label{fig:inline}
+  \caption{Example of inline gnuplot\label{fig:inline}}
 \end{figure}
-The code to generate this plot is listed in Figure~\ref{lst:inline}.
-\begin{figure}
-  \begin{lstlisting}
-\begin{tikzpicture}[domain=0:4]
-  \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-  \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-  \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-  \draw[color=red] plot[id=x] function{x}
-    node[right] {$f(x) = x$};
-  \draw[color=blue] plot[id=sin] function{sin(x)}
-    node[right] {$f(x) = \sin x$};
-  \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
-		node[right] {$f(x) = \frac{e^x}{20}$};
-\end{tikzpicture}
-  \end{lstlisting}
-  \caption{LaTeX snippet for embedded Gnuplot}
-  \label{lst:inline}
-\end{figure}
+
+The code to generate this plot is listed in Listing~\ref{lst:inline}.
+
+\begin{listing}
+  \begin{minted}{tex}
+    \begin{tikzpicture}[domain=0:4]
+      \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+      \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+      \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+      \draw[color=red] plot[id=x] function{x}
+        node[right] {$f(x) = x$};
+      \draw[color=blue] plot[id=sin] function{sin(x)}
+        node[right] {$f(x) = \sin x$};
+      \draw[color=orange] plot[id=exp] function{0.05 * exp(x)}
+        node[right] {$f(x) = \frac{e^x}{20}$};
+    \end{tikzpicture}
+  \end{minted}
+  \caption{TikZ code for embedded gnuplot\label{lst:inline}}
+\end{listing}
 
 \pagebreak[4]
 
 \subsection*{External Gnuplot}
 \addcontentsline{toc}{subsection}{External Gnuplot}
 This example includes an externally rendered Gnuplot shown in
-Figure~\ref{fig:external}.
+Figure~\ref{fig:gnuplot}.
 \begin{figure}
   \centering
   \includegraphics[scale=0.9]{plot}
-  \caption{External Gnuplot example}
-  \label{fig:external}
+  \caption{Example of Gnuplot from external source\label{fig:gnuplot}}
 \end{figure}
-The code to generate this plot is listed in Figure~\ref{lst:external}.
-\begin{figure}
-  \begin{lstinputlisting}[language=Gnuplot]{plot.gnuplot}
-  \end{lstinputlisting}
-  \caption{gnuplot source code}
-  \label{lst:external}
-\end{figure}
+The code to generate this plot is listed in Listing~\ref{lst:gnuplot}.
+\begin{listing}
+  \inputminted{gnuplot}{plot.gnuplot}
+  \caption{Source code for gnuplot\label{lst:gnuplot}}
+\end{listing}
 
 \sectionbreak{}
 
 \section*{Tables}
 \addcontentsline{toc}{section}{Tables}
-Table~\ref{table1} shows how to reproduce table data from an external CSV
+Table~\ref{tbl:csv} shows how to reproduce table data from an external CSV
 source.
 \begin{table}
   \begin{center}
@@ -161,8 +157,7 @@ source.
       columns/changed/.style={column name=\textit{Date Changed},column type=r,date type={\day\ \monthshortname\ \year}},
       every last row/.style={after row=\bottomrule}
     ]{table.csv}
-    \caption{Generate table from CSV file}
-    \label{table1}
+    \caption{Generate table from CSV file\label{tbl:csv}}
   \end{center}
 \end{table}
 
@@ -174,13 +169,13 @@ source.
 \addcontentsline{toc}{section}{Makefile}
 
 This project use a \href{https://www.gnu.org/software/make/}{Makefile} to build
-a PDF from this document. The Makefile (Figure~\ref{lst:Makefile}) is very
-simple.
-\begin{figure}
-  \lstinputlisting[language=make,tabsize=8]{Makefile}
-  \caption{Makefile source code}
-  \label{lst:Makefile}
-\end{figure}
+a PDF from this document. The Makefile in figure~\ref{lst:Makefile} is very
+simple:
+
+\begin{listing}
+  \inputminted{make}{Makefile}
+  \caption{Makefile\label{lst:Makefile}}
+\end{listing}
 
 \sectionbreak{}
 
@@ -188,8 +183,8 @@ simple.
 \addcontentsline{toc}{section}{Git}
 
 \paragraph{}
-Include another TeX document into this one. The following sections are
-contained in the document, \texttt{attachment.tex}.
+Include another LaTeX document into this one. The following sections are
+contained in the document, \href{run:./attachment.tex}{attachment.tex}.
 
 \input{attachment}
 

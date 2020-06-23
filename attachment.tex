@@ -1,7 +1,3 @@
-% \documentclass[10pt,a4paper]{article}
-
-% \begin{document}
-
 \subsection*{Restore older version of a file}
 \addcontentsline{toc}{subsection}{Restore older version of a file}
 
@@ -22,48 +18,46 @@ file and commit as a new change.
 
 \noindent This is the current version of our test file:
 
-\begin{lstlisting}[caption={Test file: README.md}]
+\begin{minted}{bash}
 test
 changed
 exit-code
-\end{lstlisting}
+\end{minted}
 
 \noindent To determine where to restore to, list the commit history of file to get commit
 hashes:
 
-\begin{lstlisting}
+\begin{minted}{bash}
 git log --oneline README.md
 dc9de3e latest change
 dbc5cca another change
 fe66fc4 new change
 c56ac1c initial
-\end{lstlisting}
+\end{minted}
 
 \noindent Lets restore to a version 2 commits back. To checkout older commit
 for that file:
 
-\begin{lstlisting}
+\begin{minted}{bash}
 git checkout dbc5cca README.md
-\end{lstlisting}
+\end{minted}
 
 \noindent Check that the local file has changed, so can commit as new change:
 
-\begin{lstlisting}[caption={Changed file: README.md}]
+\begin{minted}{bash}
 test
 changed
 exit-code
 another change
-\end{lstlisting}
+\end{minted}
 
 \noindent You can now add changed file and commit this version as a new commit:
 
-\begin{lstlisting}
+\begin{minted}{bash}
 git status
 On branch master
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
 	modified:   README.md
-\end{lstlisting}
-
-% \end{document}
+\end{minted}
