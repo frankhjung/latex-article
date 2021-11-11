@@ -1,15 +1,15 @@
 #!/usr/bin/env make
 
-.PHONY: all lint clean cleanall
 .SUFFIXES:
-.SUFFIXES: .tex .pdf .gnuplot .eps
-.DEFAULT: all
+.SUFFIXES:	.tex .pdf .gnuplot .eps
+.PHONY:		all lint clean cleanall
+.DEFAULT:	all
 
-TARGET := article.pdf
+TARGET = article.pdf
 TEXS   := $(patsubst %.pdf, %.tex, $(TARGET)) attachment.tex
-PLOT   := plot.gnuplot
+PLOT   = plot.gnuplot
 EPS    := $(patsubst %.gnuplot, %.eps, $(PLOT))
-TABLES := table.csv
+TABLES = table.csv
 
 .gnuplot.eps:
 	-gnuplot $<
@@ -22,17 +22,16 @@ TABLES := table.csv
 		-shell-escape \
 		-interaction=nonstopmode $<
 
-all: lint $(EPS) $(TARGET)
+all:	lint $(EPS) $(TARGET)
 
 lint:
 	-chktex -v2 $(TEXS)
 
 clean:
 	-latexmk -quiet -c $(TEXS)
-	@$(RM) *~
 	@$(RM) $(patsubst %.tex, %.*.*, $(TEXS))
+	@$(RM) *~ *.lol
 	@$(RM) __latexindent_temp.tex
-	@$(RM) *.pyg
 	@$(RM) -rf _minted-article/
 
 cleanall: clean
